@@ -1,0 +1,113 @@
+asyncapi: 3.0.0
+info:
+  title: Regel - Bekräfta beslut
+  version: 1.0.0
+  description: Manuell regel för att bekräfta beslut.
+
+channels:
+  bekrafta.beslut.requests:
+    address: bekrafta.beslut.requests
+    messages:
+      bekraftabeslutrequestmessage:
+        $ref: "#/components/messages/BekraftaBeslutRequestMessage"
+
+  bekrafta.beslut.responses:
+    address: bekrafta.beslut.responses
+    messages:
+      BekraftaBeslutResponseMessage:
+        $ref: "#/components/messages/BekraftaBeslutResponseMessage"
+
+operations:
+  BekraftaBeslutRequest:
+    action: receive
+    summary: Tillämpar regeln och kontrollerar om personen har rätt till Vård av husdjur.
+    channel:
+      $ref: "#/channels/bekrafta.beslut.requests"
+    reply:
+      address:
+        description: Resultatet skickas tillbaka till källan.
+        location: "$message.header#/replyTo"
+      channel:
+        $ref: "#/channels/bekrafta.beslut.responses"
+
+components:
+  schemas:
+    RtfManuellRequestMessageHeaders:
+      type: object
+      properties:
+        replyTo:
+          type: string
+          description: Topic där response ska skickas
+        correlationId:
+          type: string
+          format: uuid
+          description: Unikt ID som kopplar ihop request & response
+
+    BekraftaBeslutRequestMessageData:
+      type: object
+      title: BekraftaBeslutRequestMessageData
+      required:
+        - kundbehovsflodeId
+      properties:
+        kundbehovsflodeId:
+          type: string
+          format: uuid
+          description: Kundbehovsflöde id
+
+    RtfManuellResponseMessageHeaders:
+      type: object
+      properties:
+        correlationId:
+          type: string
+          format: uuid
+          description: Unikt ID som kopplar ihop request & response
+
+    RtfManuellResponseMessageData:
+      type: object
+      title: BekraftaBeslutResponseMessageData
+      required:
+        - kundbehovsflodeId
+        - rattTillForsakring
+      properties:
+        kundbehovsflodeId:
+          type: string
+          format: uuid
+          description: Kundbehovsflöde id
+        rattTillForsakring:
+          title: rattTillForsakring
+          type: string
+          description: Utfall av regel, om personen har rätt till försäkring
+          enum:
+            - Ja
+            - Nej
+
+  messages:
+    BekraftaBeslutRequestMessage:
+      headers:
+        $ref: "#/components/schemas/BekraftaBeslutRequestMessageHeaders"
+      payload:
+        title: BekraftaBeslutRequestMessagePayload
+        allOf:
+          - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
+          - type: object
+            title: BekraftaBeslutRequestMessageData
+            required:
+              - data
+            properties:
+              data:
+                $ref: "#/components/schemas/BekraftaBeslutRequestMessageData"
+
+    RtfManuellResponseMessage:
+      headers:
+        $ref: "#/components/schemas/BekraftaBeslutResponseMessageHeaders"
+      payload:
+        title: BekraftaBeslutResponseMessagePayload
+        allOf:
+          - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
+          - type: object
+            title: BekraftaBeslutResponseMessageData
+            required:
+              - data
+            properties:
+              data:
+                $ref: "#/components/schemas/BekraftaBeslutResponseMessageData"
