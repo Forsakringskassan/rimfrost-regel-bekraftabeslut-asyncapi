@@ -32,7 +32,7 @@ operations:
 
 components:
   schemas:
-    RtfManuellRequestMessageHeaders:
+    BekraftaBeslutRequestMessageHeaders:
       type: object
       properties:
         replyTo:
@@ -54,7 +54,7 @@ components:
           format: uuid
           description: Kundbehovsflöde id
 
-    RtfManuellResponseMessageHeaders:
+    BekraftaBeslutManuellResponseMessageHeaders:
       type: object
       properties:
         correlationId:
@@ -62,7 +62,7 @@ components:
           format: uuid
           description: Unikt ID som kopplar ihop request & response
 
-    RtfManuellResponseMessageData:
+    BekraftaBeslutManuellResponseMessageData:
       type: object
       title: BekraftaBeslutResponseMessageData
       required:
@@ -97,7 +97,7 @@ components:
               data:
                 $ref: "#/components/schemas/BekraftaBeslutRequestMessageData"
 
-    RtfManuellResponseMessage:
+    BekraftaBeslutManuellResponseMessage:
       headers:
         $ref: "#/components/schemas/BekraftaBeslutResponseMessageHeaders"
       payload:
