@@ -1,3 +1,9 @@
+## 0.0.2 (2025-12-17)
+
+### Bug Fixes
+
+-  change misspelled/incorrect names ([88ac0](https://github.com/Forsakringskassan/rimfrost-regel-bekraftabeslut-asyncapi/commit/88ac0a889ffb3fa) David Söderberg)  
+
 ## 0.0.1 (2025-12-16)
 
 ### Other changes
