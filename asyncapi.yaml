@@ -8,7 +8,7 @@ channels:
   bekrafta.beslut.requests:
     address: bekrafta.beslut.requests
     messages:
-      bekraftabeslutrequestmessage:
+      BekraftaBeslutRequestMessage:
         $ref: "#/components/messages/BekraftaBeslutRequestMessage"
 
   bekrafta.beslut.responses:
@@ -54,7 +54,7 @@ components:
           format: uuid
           description: Kundbehovsflöde id
 
-    BekraftaBeslutManuellResponseMessageHeaders:
+    BekraftaBeslutResponseMessageHeaders:
       type: object
       properties:
         correlationId:
@@ -62,7 +62,7 @@ components:
           format: uuid
           description: Unikt ID som kopplar ihop request & response
 
-    BekraftaBeslutManuellResponseMessageData:
+    BekraftaBeslutResponseMessageData:
       type: object
       title: BekraftaBeslutResponseMessageData
       required:
@@ -97,7 +97,7 @@ components:
               data:
                 $ref: "#/components/schemas/BekraftaBeslutRequestMessageData"
 
-    BekraftaBeslutManuellResponseMessage:
+    BekraftaBeslutResponseMessage:
       headers:
         $ref: "#/components/schemas/BekraftaBeslutResponseMessageHeaders"
       payload:
