@@ -1,3 +1,12 @@
+## 0.0.3 (2026-03-03)
+
+### Bug Fixes
+
+-  Rename kundbehovsflode to handlaggning ([41165](https://github.com/Forsakringskassan/rimfrost-regel-bekraftabeslut-asyncapi/commit/41165594fe2b806) Lars Persson)  
+
+### Dependency updates
+
+- update gradle to v9.3.1 ([a10a1](https://github.com/Forsakringskassan/rimfrost-regel-bekraftabeslut-asyncapi/commit/a10a1a1170b78be) renovate[bot])  
 ## 0.0.2 (2025-12-17)
 
 ### Bug Fixes
